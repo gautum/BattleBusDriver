@@ -10,7 +10,14 @@ Click [here](https://discordapp.com/oauth2/authorize?client_id=41885630559210700
 |                 !bus stats                 |     Get stats for your linked username     |
 |          !bus link <epic username>         |           Link your epic account           |
 |                 !bus unlink                |          Unlink your epic account          |
-| !bus leaders <solo/duo/squad/total> <stat> | Display the leaderboard for any given stat |
+| !bus leaders <game mode> <stat>            | Display the leaderboard for any given stat |
+
+#### Available game modes:
+solo, duo, squad, total
+
+#### Available stats:
+score, wins, win%, kills, kd, kills/min, kills/match
+matchesPlayed, minutesPlayed, top10, top25, top5, top12, top3, top6
 
 #### Server owner commands:
 
