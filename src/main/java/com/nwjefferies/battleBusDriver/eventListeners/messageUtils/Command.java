@@ -62,10 +62,6 @@ public class Command {
         }
     }
 
-    public String getUsernameOrNickName(IDiscordClient client) {
-        return message.getAuthor().getNicknameForGuild(channel.getGuild());
-    }
-
     public String getArgumentsAfterCommandWithSpaces() {
         String username = "";
         if(split.length > 3) {

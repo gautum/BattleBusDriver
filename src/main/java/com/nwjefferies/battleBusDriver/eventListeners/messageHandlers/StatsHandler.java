@@ -56,7 +56,7 @@ public class StatsHandler extends CommandHandler{
 
     private EmbedField[] processStatsHelper(EpicUserLookup epicUserLookup) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
         EmbedField solo;
         EmbedField duo;
@@ -111,7 +111,7 @@ public class StatsHandler extends CommandHandler{
 
     private EmbedField[] processStatsHelper(EpicUser user) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
         Stats stats = user.getStats();
 

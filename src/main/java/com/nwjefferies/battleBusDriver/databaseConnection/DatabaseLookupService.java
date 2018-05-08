@@ -580,4 +580,25 @@ public class DatabaseLookupService {
         connection.close();
     }
 
+    public boolean containsSubscribedUser(long guildID, EpicUser user) {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "SELECT * FROM guild_subscribed_users\n" +
+                    "WHERE guild_id = " + guildID + " AND " + " display_name = \"" + user.getDisplayName() + "\"" +
+                    ";";
+            ResultSet rs = stmt.executeQuery(query);
+            int count = 0;
+            while(rs.next()) {
+                count++;
+            }
+            stmt.close();
+            if(count > 0) {
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException e) {
+            return false;
+        }
+    }
 }
