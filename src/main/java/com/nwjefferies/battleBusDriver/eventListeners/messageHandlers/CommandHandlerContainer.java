@@ -34,6 +34,9 @@ public class CommandHandlerContainer {
 
     public Response processCommand(Command command) {
         TypeOfCommand typeOfCommand = command.getCommandType();
+        if(typeOfCommand == null) {
+            return new Response("Unable to process command: Enter a valid command");
+        }
         switch(typeOfCommand) {
             case ADD:           return addHandler.processCommand(command);
             case REMOVE:        return removeHandler.processCommand(command);
