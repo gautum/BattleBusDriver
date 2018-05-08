@@ -37,16 +37,15 @@ public class AddHandler extends CommandHandler{
 
                 databaseLookupService.addUser(user);
 
-                if(databaseLookupService.containsUnlinkedUser(guildID, user) ||
-                        databaseLookupService.containsLinkedUser(guildID, user)) {
-                    text = "Unable to add username: This username already exists in the server";
+                if(databaseLookupService.containsLinkedUser(guildID, user)) {
+                    text = "Unable to add username: This username is already linked in the server";
                 }
                 else {
                     if(databaseLookupService.addUnlinkedUser(guildID, user)) {
                         text = "Success! Username has been added to the server";
                     }
                     else {
-                        text = "Unable to add username: Please try again";
+                        text = "Unable to add username: This username has already been added to the server";
                     }
 
                 }
