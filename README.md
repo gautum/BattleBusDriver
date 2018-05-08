@@ -3,31 +3,32 @@ Click [here](https://discordapp.com/oauth2/authorize?client_id=41885630559210700
 # Bot commands:
 
 
-|                   Command                  |                 Description                |
-|:------------------------------------------:|:------------------------------------------:|
-|                  !bus help                 |                    Help                    |
-|         !bus stats <epic username>         |       Get stats for any epic username      |
-|                 !bus stats                 |     Get stats for your linked username     |
-|          !bus link <epic username>         |           Link your epic account           |
-|                 !bus unlink                |          Unlink your epic account          |
-| !bus leaders <game mode> <stat>            | Display the leaderboard for any given stat |
+
+|             Command            |                 Description                |
+|:------------------------------:|:------------------------------------------:|
+|            !bus help           |                    Help                    |
+|    !bus stats *epicUsername*   |       Get stats for any epic username      |
+|           !bus stats           |     Get stats for your linked username     |
+|    !bus link *epicUsername*    |           Link your epic username          |
+|           !bus unlink          |          Unlink your epic username         |
+| !bus leaders *gameMode* *stat* | Display the leaderboard for any given stat |
 
 #### Available game modes:
 solo, duo, squad, total
 
 #### Available stats:
-score, wins, win%, kills, kd, kills/min, kills/match
+score, wins, winRate, kills, kd, killsPerMinute, killsPerMatch,
 matchesPlayed, minutesPlayed, top10, top25, top5, top12, top3, top6
 
-#### Server owner commands:
+### Server owner commands:
 
-|      Command     |                       Description                       |
-|:----------------:|:-------------------------------------------------------:|
-|     !bus add     |           Add any epic username to leaderboard          |
-|    !bus remove   |         Remove an epic username from leaderboard        |
-|  !bus subscribe  |     Receive win notifications from an epic username     |
-| !bus unsubscribe | Stop receiving win notifications from a subscribed user |
-|   !bus channel   |            Set channel to the current channel           |
+|             Command             |                       Description                       |
+|:-------------------------------:|:-------------------------------------------------------:|
+|     !bus add *epicUsername*     |           Add any epic username to leaderboard          |
+|    !bus remove *epicUsername*   |         Remove an epic username from leaderboard        |
+|  !bus subscribe *epicUsername*  |     Receive win notifications from an epic username     |
+| !bus unsubscribe *epicUsername* | Stop receiving win notifications from a subscribed user |
+|          !bus channel           |            Set channel to the current channel           |
 
 # Features:
 
