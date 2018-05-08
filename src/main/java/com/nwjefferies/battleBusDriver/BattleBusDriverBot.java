@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.nwjefferies.battleBusDriver.databaseConnection.DatabaseLookupService;
 import com.nwjefferies.battleBusDriver.discordTools.DiscordCredentials;
+import com.nwjefferies.battleBusDriver.eventListeners.MessageListener;
 import com.xilixir.fortniteapi.v2.Configuration;
 
 
@@ -16,27 +17,26 @@ public class BattleBusDriverBot {
     public static IDiscordClient client; // The instance of the discord client.
     public static DatabaseLookupService databaseLookupService;
 
-    public static void main(String [] args) throws SQLException{
+    public static void main(String [] args) {
+
 
         Configuration discordLogin = new Configuration("discord_login", DiscordCredentials.class);
         if(!tryLogin(discordLogin.read())) {
             return;
         }
 
-        databaseLookupService = new DatabaseLookupService();
-        databaseLookupService.establishConnection();
-
         FortniteAPIPoller poller = new FortniteAPIPoller(client, databaseLookupService);
         poller.run();
     }
 
-    public BattleBusDriverBot(IDiscordClient client) {
+    public BattleBusDriverBot(IDiscordClient client) throws SQLException{
         this.client = client; // Sets the client instance to the one provided
-        
+        databaseLookupService = new DatabaseLookupService();
+        databaseLookupService.establishConnection();
         //client.getDispatcher().registerListener(new BattleBusDriverGuildCreateListener(client, guilds));
         //client.getDispatcher().registerListener(new BattleBusDriverGuildLeaveListener(client, guilds));
         //client.getDispatcher().registerListener(new BattleBusDriverReadyListener(client));
-        //client.getDispatcher().registerListener(new BattleBusDriverMessageListener(client, guilds));
+        client.getDispatcher().registerListener(new MessageListener(client, databaseLookupService));
     }
 
     private static boolean tryLogin(DiscordCredentials discordCredentials) {

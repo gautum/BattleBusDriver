@@ -32,6 +32,9 @@ public class FortniteAPIPoller {
 
                 String display_name = userLookup.getDisplay_name();
                 EpicUser userWithCurrentStats = new EpicUser(display_name);
+                if(!userWithCurrentStats.isValidUser()) {
+                    continue;
+                }
 
                 int diffSolo = (int) userWithCurrentStats.getStats().getSoloWins() - lastSolo;
                 int diffDuo = (int) userWithCurrentStats.getStats().getDuoWins() - lastDuo;
@@ -42,7 +45,6 @@ public class FortniteAPIPoller {
                 if((diffSolo | diffDuo | diffSquad) > 0) {
                     sendMessageToSubscribedGuilds(display_name, diffSolo, diffDuo, diffSquad);
                     sendMessageToLinkedGuilds(display_name, diffSolo, diffDuo, diffSquad);
-                    System.out.println("Sending message!");
                 }
 
                 try {
@@ -62,7 +64,7 @@ public class FortniteAPIPoller {
 
         for(UnlinkedOrSubscribedUserLookup lookup : subscribedUsers) {
             GuildLookup guildLookup = databaseLookupService.getGuild(lookup.getGuild_id());
-
+            System.out.println("Sending message!");
             if(diffSolo > 0) {
                 if(diffSolo == 1) {
                     sendMessage(display_name + " got a solo win.", guildLookup.getChannelID());
@@ -97,7 +99,7 @@ public class FortniteAPIPoller {
 
         for(LinkedUserLookup lookup : subscribedUsers) {
             GuildLookup guildLookup = databaseLookupService.getGuild(lookup.getGuild_id());
-
+            System.out.println("Sending message!");
             IUser user = client.getUserByID(lookup.getDiscord_id());
 
             if(diffSolo > 0) {

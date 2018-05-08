@@ -203,11 +203,11 @@ public class DatabaseLookupService {
         }
     }
 
-    public boolean removeUser(String display_name) {
+    public boolean removeUser(EpicUser user) {
         try {
             Statement stmt = connection.createStatement();
             String query = "DELETE FROM epic_users\n" +
-                    "WHERE display_name = \"" + display_name + "\";";
+                    "WHERE display_name = \"" + user.getDisplayName() + "\";";
 
             stmt.execute(query);
 
@@ -357,6 +357,51 @@ public class DatabaseLookupService {
         }
     }
 
+    public boolean containsLinkedUser(long guildID, long discordID) {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "SELECT * FROM guild_linked_users\n" +
+                    "WHERE guild_id = " + guildID + " AND " + " discord_id = " + discordID +
+                    ";";
+            ResultSet rs = stmt.executeQuery(query);
+            int count = 0;
+            while(rs.next()) {
+                count++;
+            }
+            stmt.close();
+            if(count > 0) {
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean containsLinkedUser(long guildID, EpicUser user)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "SELECT * FROM guild_linked_users\n" +
+                    "WHERE guild_id = " + guildID + " AND " + " display_name = \"" + user.getDisplayName() + "\"" +
+                    ";";
+            ResultSet rs = stmt.executeQuery(query);
+            int count = 0;
+            while(rs.next()) {
+                count++;
+            }
+            stmt.close();
+            if(count > 0) {
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException e) {
+            return false;
+        }
+    }
+
     public boolean addSubscribedUser(long guildID, EpicUser user) {
         if(user == null || !user.isValidUser()) {
             return false;
@@ -377,11 +422,11 @@ public class DatabaseLookupService {
         }
     }
 
-    public boolean removeSubscribedUser(long guildID, String displayName) {
+    public boolean removeSubscribedUser(long guildID, EpicUser user) {
         try {
             Statement stmt = connection.createStatement();
             String query = "DELETE FROM guild_subscribed_users\n" +
-                    "WHERE (guild_id, display_name) = (" + guildID + ", \"" + displayName + "\")" +
+                    "WHERE (guild_id, display_name) = (" + guildID + ", \"" + user.getDisplayName() + "\")" +
                     ";";
 
             stmt.execute(query);
@@ -456,11 +501,11 @@ public class DatabaseLookupService {
         }
     }
 
-    public boolean removeUnlinkedUser(long guildID, String displayName) {
+    public boolean removeUnlinkedUser(long guildID, EpicUser user) {
         try {
             Statement stmt = connection.createStatement();
             String query = "DELETE FROM guild_unlinked_users\n" +
-                    "WHERE (guild_id, display_name) = (" + guildID + ", \"" + displayName + "\")" +
+                    "WHERE (guild_id, display_name) = (" + guildID + ", \"" + user.getDisplayName() + "\")" +
                     ";";
 
             stmt.execute(query);
@@ -491,6 +536,29 @@ public class DatabaseLookupService {
         }
         catch(SQLException e) {
             return null;
+        }
+    }
+
+    public boolean containsUnlinkedUser(long guildID, EpicUser user)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "SELECT * FROM guild_unlinked_users\n" +
+                    "WHERE guild_id = " + guildID + " AND " + " display_name = \"" + user.getDisplayName() + "\"" +
+                    ";";
+            ResultSet rs = stmt.executeQuery(query);
+            int count = 0;
+            while(rs.next()) {
+                count++;
+            }
+            stmt.close();
+            if(count > 0) {
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException e) {
+            return false;
         }
     }
 
