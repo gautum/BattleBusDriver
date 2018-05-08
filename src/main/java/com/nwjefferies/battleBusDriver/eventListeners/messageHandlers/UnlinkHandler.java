@@ -19,7 +19,7 @@ public class UnlinkHandler extends CommandHandler{
             return null;
         }
         String text = "";
-        System.out.println("[" + Calendar.getInstance().getTime() + "][Unlink] Processing unlink command");
+        System.out.println("[" + Calendar.getInstance().getTime() + "][UnlinkHandler] Processing unlink command");
         long guildID = command.getGuildId();
 
         if(command.getNumArguments() > 2) {

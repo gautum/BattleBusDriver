@@ -23,7 +23,6 @@ public class EpicUser {
             this.displayName = lookup.getDisplayName();
         }
         catch(IOException e) {
-            displayName = null;
             stats = null;
         }
     }
@@ -40,7 +39,7 @@ public class EpicUser {
     }
 
     public boolean isValidUser() {
-        if((displayName == null) || (stats == null)) {
+        if(stats == null) {
             return false;
         }
         return true;
