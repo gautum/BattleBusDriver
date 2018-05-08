@@ -47,6 +47,10 @@ public class Command {
 
     public TypeOfCommand getCommandType() {
         try {
+            if(split.length == 1) {
+                return TypeOfCommand.HELP;
+            }
+
             String firstWord = split[1].toUpperCase();
             return TypeOfCommand.valueOf(firstWord);
         }
