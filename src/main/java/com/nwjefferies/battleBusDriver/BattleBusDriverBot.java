@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.nwjefferies.battleBusDriver.databaseConnection.DatabaseLookupService;
 import com.nwjefferies.battleBusDriver.discordTools.DiscordCredentials;
+import com.nwjefferies.battleBusDriver.eventListeners.GuildCreateListener;
 import com.nwjefferies.battleBusDriver.eventListeners.MessageListener;
 import com.xilixir.fortniteapi.v2.Configuration;
 
@@ -33,7 +34,7 @@ public class BattleBusDriverBot {
         this.client = client; // Sets the client instance to the one provided
         databaseLookupService = new DatabaseLookupService();
         databaseLookupService.establishConnection();
-        //client.getDispatcher().registerListener(new BattleBusDriverGuildCreateListener(client, guilds));
+        client.getDispatcher().registerListener(new GuildCreateListener(client, databaseLookupService));
         //client.getDispatcher().registerListener(new BattleBusDriverGuildLeaveListener(client, guilds));
         //client.getDispatcher().registerListener(new BattleBusDriverReadyListener(client));
         client.getDispatcher().registerListener(new MessageListener(client, databaseLookupService));

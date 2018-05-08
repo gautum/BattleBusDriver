@@ -33,6 +33,9 @@ public class Command {
     public long getChannelId() {
         return channel.getLongID();
     }
+    public String getChannelName() {
+        return channel.getName();
+    }
 
     public int getNumArguments() {
         return split.length;

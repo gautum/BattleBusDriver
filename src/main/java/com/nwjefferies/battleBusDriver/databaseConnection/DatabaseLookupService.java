@@ -45,6 +45,20 @@ public class DatabaseLookupService {
         }
     }
 
+    public boolean setChannel(long guild_id, long channel_id) {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE guild\n" +
+                    "SET channel_id = " + channel_id + "\n" +
+                    "WHERE guild_id = " + guild_id + ";";
+            stmt.execute(query);
+            return true;
+        }
+        catch(SQLException e) {
+            return false;
+        }
+    }
+
     public ArrayList<GuildLookup> getGuilds() {
         try {
             Statement stmt = connection.createStatement();
